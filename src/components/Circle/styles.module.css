@@ -1,0 +1,11 @@
+.circle {
+  background-color: inherit;
+  border: 1px solid white;
+  border-radius: 100%;
+  cursor: pointer;
+  height: 1px;
+  margin: auto;
+  position: absolute;
+  transition: 250ms width, 250ms height, 300ms background-color;
+  width: 1px;
+}
