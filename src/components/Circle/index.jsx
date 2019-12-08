@@ -14,14 +14,14 @@ const Circle = ({ size, sizeOffset, i }) => {
   }, [size]);
 
   const randomColor = () => {
-    return `rgb(${getRandomInt(0, 255)}, ${getRandomInt(
-      0,
-      255
-    )}, ${getRandomInt(0, 255)})`;
+    return `rgb(
+      ${getRandomInt(0, 255)},
+      ${getRandomInt(0, 255)},
+      ${getRandomInt(0, 255)})`;
   };
 
   const hoverState = () => {
-    setSizeState(getRandomInt(size - sizeOffset, size + sizeOffset));
+    setSizeState(getRandomInt(size, size + sizeOffset));
     setColor(randomColor);
   };
 

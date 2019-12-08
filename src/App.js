@@ -3,7 +3,7 @@ import Circle from "./components/Circle";
 import styles from "./App.module.css";
 import getRandomInt from "./utils/getRandomInt";
 
-const maxDiff = 35;
+const maxDiff = 40;
 
 const App = () => {
   const [maxSize, setMaxSize] = useState(350);
@@ -32,10 +32,11 @@ const App = () => {
   const updateWhenResize = () => {
     const _maxSize =
       window.innerWidth > window.innerHeight
-        ? window.innerHeight
-        : window.innerWidth;
+        ? window.innerWidth
+        : window.innerHeight;
     setMaxSize(_maxSize - 20);
   };
+
   return <div className={styles.App}>{circles(maxSize)}</div>;
 };
 
