@@ -4,14 +4,37 @@ import styles from "./styles.module.css";
 import getRandomInt from "../../utils/getRandomInt";
 
 const initColor = "rgb(150, 150, 150)";
+const transitionTime = 250;
 
-const Circle = ({ size, sizeOffset, i }) => {
+const Circle = ({ size, sizeOffset, isAnimating }) => {
   const [sizeState, setSizeState] = useState(size);
   const [color, setColor] = useState(initColor);
 
   useEffect(() => {
     setSizeState(size);
   }, [size]);
+
+  useEffect(() => {
+    if (isAnimating) {
+      setSizeState(getRandomInt(size, size + sizeOffset));
+      setColor(randomColor);
+      const animate = setTimeout(() => {
+        setColor(initColor);
+        setSizeState(size);
+      }, transitionTime);
+      return () => clearTimeout(animate);
+      // const autoEffect = setInterval(() => {
+      //   console.log(transitionTime);
+      //   setSizeState(getRandomInt(size, size + sizeOffset));
+      //   setColor(randomColor);
+      //   setInterval(() => {
+      //     setColor(initColor);
+      //     setSizeState(size);
+      //   }, transitionTime * 2);
+      // }, transitionTime);
+      // return () => clearInterval(autoEffect);
+    }
+  }, [isAnimating]);
 
   const randomColor = () => {
     return `rgb(
@@ -21,11 +44,13 @@ const Circle = ({ size, sizeOffset, i }) => {
   };
 
   const hoverState = () => {
+    if (isAnimating) return;
     setSizeState(getRandomInt(size, size + sizeOffset));
     setColor(randomColor);
   };
 
   const normalState = () => {
+    if (isAnimating) return;
     setColor(initColor);
     setSizeState(size);
   };
@@ -48,6 +73,7 @@ const Circle = ({ size, sizeOffset, i }) => {
 };
 
 Circle.propTypes = {
+  isAnimating: PropTypes.bool,
   size: PropTypes.number,
   sizeOffset: PropTypes.number
 };
